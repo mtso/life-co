@@ -2,7 +2,7 @@
 
 Web app to find out who's hanging out tonight where.
 
-User Stories
+## User Stories
 
 1. [ ] As an unauthenticated user, I can view all bars in my area.
 1. [ ] As an authenticated user, I can add myself to a bar to indicate I am going there tonight.
