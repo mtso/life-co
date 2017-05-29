@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "start": "webpack && node ./build/server.js",
+    "dev": "webpack && torus run node ./build/server.js"
+  },
   "dependencies": {
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
