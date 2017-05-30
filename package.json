@@ -3,7 +3,7 @@
     "start": "webpack && node ./build/server.js",
     "dev": "webpack && torus run node ./build/server.js",
     "release": "echo \"Error: not implemented\" && exit 1",
-    "clean": "rm -rf ./build ./dist"
+    "clean": "rm -rf ./build ./dist ./node_modules"
   },
   "dependencies": {
     "babel-core": "^6.24.1",
@@ -13,8 +13,7 @@
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "express-session": "^1.15.3",
-    "pg": "^6.2.3",
-    "pg-hstore": "^2.3.2",
+    "mysql": "^2.13.0",
     "rds-connection-string": "^0.1.2",
     "react": "^15.5.4",
     "react-router": "^4.1.1",
