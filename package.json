@@ -1,7 +1,9 @@
 {
   "scripts": {
     "start": "webpack && node ./build/server.js",
-    "dev": "webpack && torus run node ./build/server.js"
+    "dev": "webpack && torus run node ./build/server.js",
+    "release": "echo \"Error: not implemented\" && exit 1",
+    "clean": "rm -rf ./build ./dist"
   },
   "dependencies": {
     "babel-core": "^6.24.1",
@@ -13,7 +15,6 @@
     "express-session": "^1.15.3",
     "pg": "^6.2.3",
     "pg-hstore": "^2.3.2",
-    "pg-native": "^1.10.1",
     "rds-connection-string": "^0.1.2",
     "react": "^15.5.4",
     "react-router": "^4.1.1",
