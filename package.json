@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "webpack && node ./build/server.js",
-    "dev": "webpack && torus run node ./build/server.js",
+    "dev": "ttab eval \"webpack -w\" ; ttab eval \"torus run nodemon ./build/server.js\"",
     "zip": "node ./bin/zip.js",
     "clean": "rm -rf ./build ./dist ./node_modules"
   },
@@ -24,5 +24,9 @@
     "react-router-dom": "^4.1.1",
     "sequelize": "^3.30.4",
     "webpack": "^2.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0",
+    "ttab": "^0.5.1"
   }
 }
