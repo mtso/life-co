@@ -14,6 +14,6 @@ sequelize
   .sync()
   .then(() => app.listen(
     port,
-    () => console.log('Listening on', port)
+    () => console.log('listening on', port)
   ))
   .catch((err) => console.error(err))

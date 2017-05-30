@@ -26,7 +26,7 @@ module.exports = [
     module: {
       rules: [
         {
-          test: /\/jsx?$/,
+          test: /\.jsx?$/,
           loader: 'babel-loader',
           query: {
             presets: [ 'es2015', 'react' ],
@@ -60,7 +60,7 @@ module.exports = [
     module: {
       rules: [
         {
-          test: /\/jsx?$/,
+          test: /\.jsx?$/,
           loader: 'babel-loader',
           query: {
             presets: [ 'es2015', 'react' ],
