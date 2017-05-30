@@ -10,16 +10,16 @@ const sequelize = new Sequelize(
 )
 
 const app = express()
+const port = process.env.PORT || 3750
 
 app.use(middleware)
 app.use('/api', api)
 app.use('/*', root)
 
-const port = process.env.PORT || 3750
-
 sequelize
   .sync()
-  .then(() => {
-    app.listen(port, () => console.log('Listening on', port))
-  })
+  .then(() => app.listen(
+    port,
+    () => console.log('Listening on', port)
+  ))
   .catch((err) => console.error(err))

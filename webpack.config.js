@@ -53,6 +53,9 @@ module.exports = [
     },
     resolve: {
       extensions: [ '.js', '.jsx' ],
+      alias: {
+        'pg-native': path.join(__dirname, 'server', 'alias', 'pg-native'),
+      },
     },
     module: {
       rules: [
