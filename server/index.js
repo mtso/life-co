@@ -1,13 +1,7 @@
 import express from 'express'
 import middleware from './middleware'
 import { api, root } from './routes'
-
-import Sequelize from 'sequelize'
-import connString from 'rds-connection-string'
-
-const sequelize = new Sequelize(
-  connString({scheme: 'postgres'}) || process.env.DATABASE_URL
-)
+import { sequelize } from './models'
 
 const app = express()
 const port = process.env.PORT || 3750
@@ -20,6 +14,6 @@ sequelize
   .sync()
   .then(() => app.listen(
     port,
-    () => console.log('Listening on', port)
+    () => console.log('listening on', port)
   ))
   .catch((err) => console.error(err))

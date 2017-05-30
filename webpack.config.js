@@ -26,7 +26,7 @@ module.exports = [
     module: {
       rules: [
         {
-          test: /\/jsx?$/,
+          test: /\.jsx?$/,
           loader: 'babel-loader',
           query: {
             presets: [ 'es2015', 'react' ],
@@ -54,13 +54,13 @@ module.exports = [
     resolve: {
       extensions: [ '.js', '.jsx' ],
       alias: {
-        'pg-native': path.join(__dirname, 'server', 'alias', 'pg-native'),
+        'pg-hstore': path.join(__dirname, '.alias', 'pg-hstore'),
       },
     },
     module: {
       rules: [
         {
-          test: /\/jsx?$/,
+          test: /\.jsx?$/,
           loader: 'babel-loader',
           query: {
             presets: [ 'es2015', 'react' ],

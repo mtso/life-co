@@ -1,5 +1,7 @@
+import path from 'path'
 import bodyParser from 'body-parser'
 import session from 'express-session'
+import express from 'express'
 
 const middleware = [
   session({
@@ -9,6 +11,7 @@ const middleware = [
   }),
   bodyParser.json(),
   bodyParser.urlencoded({extended: true}),
+  express.static(path.resolve(__dirname, '..', 'dist')),
 ]
 
 export default middleware
