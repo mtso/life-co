@@ -16,11 +16,15 @@ export const validateParams = (req, res, next) => {
 }
 
 export const isNotCheckedIn = (req, res, next) => {
+  const now = new Date()
+  const ms = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())
+  const lastNight = new Date(ms)
   CheckIn
-    .find({
+    .findOne({
       where: {
         username: req.user.username,
         business: req.body.business,
+        createdAt: { gte: lastNight },
       },
     })
     .then((checkin) => {
