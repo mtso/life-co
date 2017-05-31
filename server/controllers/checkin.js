@@ -5,6 +5,16 @@
 // scheduled job: every day, at 4am, remove all past check-ins
 //
 
+export const validateParams = (req, res, next) => {
+  if (!req.body.username) {
+    res.json({error: 'Missing username'})
+  } else if (!req.body.business) {
+    res.json({error: 'Missing business ID'})
+  } else {
+    next()
+  }
+}
+
 export const isNotCheckedIn = (req, res, next) => {
   CheckIn
     .find({
@@ -21,15 +31,10 @@ export const isNotCheckedIn = (req, res, next) => {
       }
       next()
     })
-    .catch((err) => next(err))
+    .catch(next)
 }
 
 export const postCheckIn = (req, res, next) => {
-  if (!req.body.business) {
-    return res.json({
-      error: 'No associated business'
-    })
-  }
   CheckIn
     .create({
       username: req.user.username,
@@ -38,5 +43,5 @@ export const postCheckIn = (req, res, next) => {
     .then((checkin) => {
       res.json(checkin.get({plain: true}))
     })
-    .catch((err) => next(err))
+    .catch(next)
 }
