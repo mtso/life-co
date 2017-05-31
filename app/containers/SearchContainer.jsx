@@ -58,7 +58,7 @@ class SearchContainer extends Component {
         onSubmit={this.onSubmit}
         onChange={this.onChange}
         searchTerm={this.state.searchTerm}
-        searchbox={this.searchbox}
+        searchboxRef={(node) => this.searchbox = node}
         searchResults={this.state.searchResults}
         isLoading={this.state.isLoading}
       >
