@@ -1,7 +1,7 @@
 import express from 'express'
 import middleware from './middleware'
 import { api, root } from './routes'
-import { sequelize } from './models'
+import models from './models'
 
 const app = express()
 const port = process.env.PORT || 3750
@@ -10,7 +10,7 @@ app.use(middleware)
 app.use('/api', api)
 app.use('/*', root)
 
-sequelize
+models.sequelize
   .sync()
   .then(() => app.listen(
     port,
