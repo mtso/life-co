@@ -1,9 +1,10 @@
+import path from 'path'
 import request from 'superagent'
-import { oauth } from '../yelpApi.json'
+import yelpApi from '../yelpApi.json'
 
-const getAccessToken = (callback) => {
+export const getAccessToken = (callback) => {
   request
-    .post(oauth)
+    .post('https://api.yelp.com/oauth2/token')
     .set('Content-Type', 'application/x-www-form-urlencoded')
     .send({
       client_id: process.env.YELP_CLIENT_ID,
@@ -12,4 +13,5 @@ const getAccessToken = (callback) => {
     .end(callback)
 }
 
-export default getAccessToken
+export const getEndpoint = (url) =>
+  path.join(yelpApi.endpoint, yelpApi.path[url])

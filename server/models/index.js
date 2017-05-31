@@ -11,7 +11,6 @@ const imports = [
 ]
 
 const models = {}
-// models.sequelize = sequelize
 
 imports.forEach((importFn) => {
   const model = importFn(sequelize, Sequelize)
@@ -24,9 +23,7 @@ Object.keys(models).forEach((name) => {
   }
 })
 
-export default models
-
-export default {
+module.exports = {
   sequelize,
   ...models,
 }
