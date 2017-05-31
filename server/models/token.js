@@ -64,7 +64,6 @@ module.exports = (sequelize, DataTypes) => {
         const getUpdatedToken = (resolve, reject) => {
           this.findById(1)
             .then((token) => {
-              console.log(new Date(token.expiresAt), time)
               if (!token) {
                 this.createFirst()
                   .then((first) => resolve(first))

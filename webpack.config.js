@@ -22,7 +22,7 @@ module.exports = [
       filename: 'bundle.js',
     },
     resolve: {
-      extensions: [ '.js', '.jsx' ],
+      extensions: [ '.js', '.jsx', '.json' ],
     },
     module: {
       rules: [
@@ -53,7 +53,7 @@ module.exports = [
       Buffer: false,
     },
     resolve: {
-      extensions: [ '.js', '.jsx' ],
+      extensions: [ '.js', '.jsx', '.json' ],
       alias: {
         'pg-hstore': path.join(__dirname, '.alias', 'pg-hstore'),
       },
@@ -64,7 +64,7 @@ module.exports = [
           test: /\.jsx?$/,
           loader: 'babel-loader',
           query: {
-            presets: [ 'es2015', 'react' ],
+            presets: [ 'es2015', 'react', 'stage-0' ],
           },
         },
       ],

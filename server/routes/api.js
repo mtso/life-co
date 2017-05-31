@@ -1,5 +1,6 @@
 import express from 'express'
-import { attachToken } from '../controllers/yelp'
+import request from 'superagent'
+import { attachToken, searchBusinesses } from '../controllers/yelp'
 
 const api = express.Router()
 
@@ -14,18 +15,6 @@ api.get('/time', (req, res, next) => {
   res.json({ now })
 })
 
-api.get('/search', attachToken, (req, res, next) => {
-  console.log(req.token.typedValue)
-  request
-    .get('https://api.yelp.com/v3/businesses/search')
-    .set('Authorization', req.token.typedValue)
-    .query({ location: req.query.location })
-    .end((err, resp) => {
-      if (err || resp.body.error) {
-        return next(err || resp.body.error)
-      }
-      res.json(resp.body)
-    })
-})
+api.get('/search', attachToken, searchBusinesses)
 
 export default api

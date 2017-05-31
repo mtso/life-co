@@ -5,7 +5,7 @@ import express from 'express'
 import logger from 'morgan'
 
 const middleware = [
-  logger(),
+  logger('combined'),
   session({
     secret: process.env.SESSION_SECRET,
     resave: true,
