@@ -3,6 +3,7 @@ import bodyParser from 'body-parser'
 import session from 'express-session'
 import express from 'express'
 import logger from 'morgan'
+import helmet from 'helmet'
 import passport from 'passport'
 import { Strategy as TwitterStrategy } from 'passport-twitter'
 
@@ -21,6 +22,7 @@ passport.use(twitterStrategy)
 const middleware = [
   logger('combined'),
   session({
+    name: 'sessionId',
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
@@ -29,6 +31,7 @@ const middleware = [
   passport.session(),
   bodyParser.json(),
   bodyParser.urlencoded({extended: true}),
+  helmet(),
   express.static(path.resolve(__dirname, '..', 'dist')),
 ]
 
