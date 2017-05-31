@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+const webpack = require('webpack')
 
 const loadModules = fs
   .readdirSync('node_modules')
@@ -68,5 +69,8 @@ module.exports = [
         },
       ],
     },
+    plugins: [
+     new webpack.DefinePlugin({ "global.GENTLY": false })
+    ],
   },
 ]

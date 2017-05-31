@@ -1,8 +1,8 @@
 import request from 'superagent'
-import { Token } from '../models'
+import models from '../models'
 
 export const attachToken = (req, res, next) => {
-  Token
+  models.Token
     .getUpdatedToken(Date.now())
     .then((token) => {
       req.token = token

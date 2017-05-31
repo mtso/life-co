@@ -1,19 +1,20 @@
 import Sequelize from 'sequelize'
 import connString from 'rds-connection-string'
+import Token from './Token'
 
 const sequelize = new Sequelize(
-  connString({scheme: 'mysql'}) || process.env.DATABASE_URL
+  connString({scheme: 'mysql'}) || process.env.DATABASE_URL + '/lifeco'
 )
 
-const inits = [
-  require('./Token'),
+const imports = [
+  Token,
 ]
 
 const models = {}
-models.sequelize = sequelize
+// models.sequelize = sequelize
 
-inits.forEach((init) => {
-  const model = init(sequelize, Sequelize)
+imports.forEach((importFn) => {
+  const model = importFn(sequelize, Sequelize)
   models[model.name] = model
 })
 
@@ -24,3 +25,8 @@ Object.keys(models).forEach((name) => {
 })
 
 export default models
+
+export default {
+  sequelize,
+  ...models,
+}

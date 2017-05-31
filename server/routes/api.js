@@ -10,25 +10,21 @@ api.get('/test', (req, res) => {
 })
 
 api.get('/time', (req, res, next) => {
-  sequelize
-    .query('SELECT NOW() as right_now')
-    .then((rows) => {
-      const now = rows[0][0].right_now
-      res.json({ now })
-    })
-    .catch((err) => next(err))
+  const now = new Date
+  res.json({ now })
 })
 
-api.search('/search', attachToken, (req, res, next) => {
+api.get('/search', attachToken, (req, res, next) => {
+  console.log(req.token.typedValue)
   request
     .get('https://api.yelp.com/v3/businesses/search')
     .set('Authorization', req.token.typedValue)
-    .query({ location: req.params.location })
+    .query({ location: req.query.location })
     .end((err, resp) => {
       if (err || resp.body.error) {
         return next(err || resp.body.error)
       }
-      res.json(res.body)
+      res.json(resp.body)
     })
 })
 

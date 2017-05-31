@@ -1,26 +1,15 @@
-import request from 'superagent'
-
-const getAccessToken = (callback) => {
-  request
-    .post('https://api.yelp.com/oauth2/token')
-    .set('Content-Type', 'application/x-www-form-urlencoded')
-    .send({
-      client_id: process.env.YELP_CLIENT_ID,
-      client_secret: process.env.YELP_CLIENT_SECRET,
-    })
-    .end(callback)
-}
+import getAccessToken from '../utils/getAccessToken'
 
 module.exports = (sequelize, DataTypes) => {
   const Token = sequelize.define('Token', {
     value: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     expiresAt: {
-      type: Sequelize.DATE(6),
+      type: DataTypes.DATE(6),
     },
     type: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
   }, {
     getterMethods: {
