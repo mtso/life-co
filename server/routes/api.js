@@ -1,24 +1,16 @@
 import express from 'express'
 import request from 'superagent'
 import { attachToken, searchBusinesses } from '../controllers/yelp'
-import { validateParams, isNotCheckedIn, postCheckIn } from '../controllers/checkin'
+import { validateParams, isNotCheckedIn, isCheckedIn, postCheckIn, cancelCheckIn } from '../controllers/checkin'
 import { isAuthenticated } from '../controllers/auth'
+import { cacheSearch } from '../controllers/cache'
 
 const api = express.Router()
 
-api.get('/test', (req, res) => {
-  res.json({
-    message: 'Hello~ from /test api route.',
-  })
-})
+api.get('/search', cacheSearch, attachToken, searchBusinesses)
 
-api.get('/time', (req, res, next) => {
-  const now = new Date
-  res.json({ now })
-})
-
-api.get('/search', attachToken, searchBusinesses)
-
-api.post('/checkin', isAuthenticated, validateParams, isNotCheckedIn, postCheckIn)
+api.route('/checkin')
+  .post(isAuthenticated, validateParams, isNotCheckedIn, postCheckIn)
+  .delete(isAuthenticated, validateParams, isCheckedIn, cancelCheckIn)
 
 export default api

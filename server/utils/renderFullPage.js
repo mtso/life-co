@@ -1,4 +1,4 @@
-export default ({ markup }) => {
+export default ({ markup, preloadedState }) => {
   return `
     <!doctype html>
     <html>
@@ -10,6 +10,11 @@ export default ({ markup }) => {
       </head>
       <body>
         <div id='app'>${markup}</div>
+        <script>
+          window.__PRELOADED_STATE__ = ${
+            JSON.stringify(preloadedState || {}).replace('/</g', '\\u003c')
+          }
+        </script>
         <script src='/bundle.js'></script>
       </body>
     </html>

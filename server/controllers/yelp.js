@@ -21,5 +21,25 @@ export const searchBusinesses = (req, res, next) =>
       if (err || resp.body.error) {
         return next(err || resp.body.error)
       }
-      res.json(resp.body)
+      res.json(resp.body.businesses)
     })
+
+export const attachBusinesses = (req, res, next) => {
+  if (req.query.location === '') {
+    req.state = req.state || {}
+    req.state.businesses = []
+    return next()
+  }
+  request
+    .get(yelpApi.endpoint + yelpApi.path.search)
+    .set('Authorization', req.token.typedValue)
+    .query({ location: req.query.location })
+    .end((err, resp) => {
+      if (err || resp.body.error) {
+        return next(err || resp.body.error)
+      }
+      req.state = req.state || {}
+      req.state.businesses = resp.body.businesses
+      next()
+    })
+}
