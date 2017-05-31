@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "webpack && node ./build/server.js",
-    "dev": "ttab eval \"webpack -w\" ; ttab eval \"torus run nodemon ./build/server.js\"",
+    "dev": "./node_modules/.bin/ttab eval \"webpack -w\" ; ./node_modules/.bin/ttab eval \"torus run nodemon ./build/server.js\"",
     "zip": "node ./bin/zip.js",
     "clean": "rm -rf ./build ./dist ./node_modules"
   },
@@ -19,6 +19,8 @@
     "express-session": "^1.15.3",
     "morgan": "^1.8.2",
     "mysql": "^2.13.0",
+    "passport": "^0.3.2",
+    "passport-twitter": "^1.0.4",
     "rds-connection-string": "^0.1.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",

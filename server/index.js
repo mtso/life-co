@@ -1,6 +1,6 @@
 import express from 'express'
 import middleware from './middleware'
-import { api, root } from './routes'
+import { api, root, auth } from './routes'
 import { sequelize } from './models'
 
 const app = express()
@@ -8,6 +8,7 @@ const port = process.env.PORT || 3750
 
 app.use(middleware)
 app.use('/api', api)
+app.use('/auth', auth)
 app.use('/*', root)
 
 sequelize
