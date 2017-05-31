@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Search = ({ isLoading, searchResults, searchbox, searchTerm, onChange, onSubmit, children }) => (
+const Search = ({ isLoading, searchResults, searchboxRef, searchTerm, onChange, onSubmit, children }) => (
   <div>
     <h1>Life Co.</h1>
     <form onSubmit={onSubmit}>
@@ -9,7 +9,7 @@ const Search = ({ isLoading, searchResults, searchbox, searchTerm, onChange, onS
         placeholder='Location'
         value={searchTerm}
         onChange={onChange}
-        ref={(node) => searchbox = node}
+        ref={searchboxRef}
       />
       <button type='submit'>
         Search
