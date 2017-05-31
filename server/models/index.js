@@ -3,7 +3,7 @@ import connString from 'rds-connection-string'
 import Token from './Token'
 
 const sequelize = new Sequelize(
-  connString({scheme: 'mysql'}) || process.env.DATABASE_URL + '/lifeco'
+  connString({scheme: 'mysql'}) || process.env.DATABASE_URL
 )
 
 const imports = [
