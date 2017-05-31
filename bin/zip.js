@@ -1,9 +1,6 @@
 const fs = require('fs')
 const spawn = require('child_process').spawn
 const info = JSON.parse(fs.readFileSync('./package.json').toString())
-const pwd = spawn('pwd')
-
-pwd.stdout.on('data', (data) => console.log(`${data}`))
 
 const zip = spawn('zip', [
   '-r',
@@ -11,6 +8,7 @@ const zip = spawn('zip', [
   'app/',
   'client/',
   'server/',
+  '.alias/',
   'package.json',
   'README.md',
   'webpack.config.js',  
