@@ -6,7 +6,8 @@
     "start": "webpack && node ./build/server.js",
     "dev": "ttab eval \"webpack -w\" ; ttab eval \"torus run nodemon ./build/server.js\"",
     "zip": "node ./bin/zip.js",
-    "clean": "rm -rf ./build ./dist ./node_modules"
+    "clean": "rm -rf ./build ./dist ./node_modules",
+    "test": "webpack && torus run mocha"
   },
   "dependencies": {
     "babel-core": "^6.24.1",
@@ -15,6 +16,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "body-parser": "^1.17.2",
+    "bulma": "^0.4.2",
     "express": "^4.15.3",
     "express-session": "^1.15.3",
     "morgan": "^1.8.2",
@@ -31,8 +33,11 @@
     "webpack": "^2.6.1"
   },
   "devDependencies": {
+    "chai": "^4.0.0",
     "eslint": "^3.19.0",
+    "mocha": "^3.4.2",
     "nodemon": "^1.11.0",
+    "supertest": "^3.0.0",
     "ttab": "^0.5.1"
   }
 }
