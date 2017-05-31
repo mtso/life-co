@@ -9,7 +9,7 @@ class SearchContainer extends Component {
     super(props)
     this.state = {
       searchTerm: '',
-      isSubmitting: false,
+      isLoading: false,
       searchResults: [],
     }
     this.onSubmit = this.onSubmit.bind(this)
@@ -23,11 +23,11 @@ class SearchContainer extends Component {
   }
   onSubmit(e) {
     e.preventDefault()
-    if (this.state.isSubmitting) {
+    if (this.state.isLoading) {
       return
     }
     this.setState({
-      isSubmitting: true,
+      isLoading: true,
     }, () => {
       searchBusinesses(this.state.searchTerm)
         .then((resp) => {
@@ -42,26 +42,35 @@ class SearchContainer extends Component {
           })
           this.setState({
             searchResults,
-            isSubmitting: false,
+            isLoading: false,
           })
         })
         .catch(handleError)
     })
   }
+  componentDidMount() {
+    this.searchbox.focus()
+  }
   render() {
     return (
       <div>
         <h1>Life Co.</h1>
+        <form onSubmit={this.onSubmit}>
           <input
             type='search'
             placeholder='Location'
             value={this.state.searchTerm}
             onChange={this.onChange}
+            ref={(node) => this.searchbox = node}
           />
-          <button onClick={this.onSubmit}>
+          <button type='submit'>
             Search
           </button>
-        <p>Search Results</p>
+        </form>
+        <p>Search Results {
+          this.state.isLoading && '(Loading...)' ||
+          this.state.searchResults && `(${this.state.searchResults.length})`
+        }</p>
         <SearchResultsContainer searchResults={this.state.searchResults} />
       </div>
     )
