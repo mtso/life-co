@@ -3,6 +3,7 @@ import { searchBusinesses } from '../utils/apiSearch'
 import handleError from '../utils/handleError'
 import SearchResultsContainer from './SearchResultsContainer'
 import request from 'superagent'
+import Search from '../components/Search'
 
 class SearchContainer extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class SearchContainer extends Component {
   }
   onSubmit(e) {
     e.preventDefault()
-    if (this.state.isLoading) {
+    if (this.state.isLoading || this.state.searchTerm === '') {
       return
     }
     this.setState({
@@ -53,26 +54,16 @@ class SearchContainer extends Component {
   }
   render() {
     return (
-      <div>
-        <h1>Life Co.</h1>
-        <form onSubmit={this.onSubmit}>
-          <input
-            type='search'
-            placeholder='Location'
-            value={this.state.searchTerm}
-            onChange={this.onChange}
-            ref={(node) => this.searchbox = node}
-          />
-          <button type='submit'>
-            Search
-          </button>
-        </form>
-        <p>Search Results {
-          this.state.isLoading && '(Loading...)' ||
-          this.state.searchResults && `(${this.state.searchResults.length})`
-        }</p>
+      <Search
+        onSubmit={this.onSubmit}
+        onChange={this.onChange}
+        searchTerm={this.state.searchTerm}
+        searchbox={this.searchbox}
+        searchResults={this.state.searchResults}
+        isLoading={this.state.isLoading}
+      >
         <SearchResultsContainer searchResults={this.state.searchResults} />
-      </div>
+      </Search>
     )
   }
 }

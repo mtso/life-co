@@ -2,15 +2,17 @@ import React from 'react'
 import Link from './Link'
 
 export default ({ image_url, name, url, rating }) => (
-  <Link to={url}>
-    <div className='search-result-cell'>
+  <div className='search-result-cell'>
+    <Link to={url}>
       <img src={image_url} style={{height: '80px', display: 'inline-block'}} />
-      <div style={{display: 'inline-block', marginLeft: '10px'}}>
+    </Link>
+    <div style={{display: 'inline-block', marginLeft: '10px'}}>
+      <Link to={url}>
         <h2>{name}</h2>
-        <p>{rating} stars <button onClick={() => _}>Going
-          </button>
-        </p>
-      </div>
+      </Link>
+      <p>{rating} stars <button onClick={() => _}>Going
+        </button>
+      </p>
     </div>
-  </Link>
+  </div>
 )
