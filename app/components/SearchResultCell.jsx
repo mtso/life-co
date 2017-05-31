@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link } from './Link'
+import Link from './Link'
 
 export default ({ image_url, name, url, rating }) => (
-  <Link href={url}>
+  <Link to={url}>
     <div className='search-result-cell'>
       <img src={image_url} style={{height: '80px'}} />
       <h2>{name}</h2>

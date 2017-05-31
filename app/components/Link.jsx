@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { Link as RoutedLink } from 'react-router-dom'
 
-const Link = ({ to, children, ...rest }) => {
-  // if (/^https?:\/\//.test(to)) {
+const Link = (props) => {
+  const to = props.to
+  const children = props.children
   if (to.indexOf('://') === -1) {
-    return (<a href={to} {...rest}>{children}</a>)
+    return (<RoutedLink to={to} {...props}>{children}</RoutedLink>)
   } else {
-    return (<Link to={to} {...rest}>{children}</Link>)
+    return (<a href={to} {...props}>{children}</a>)
   }
 }
 
