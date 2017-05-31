@@ -17,3 +17,5 @@ sequelize
     () => console.log('listening on', port)
   ))
   .catch((err) => console.error(err))
+
+export default app
