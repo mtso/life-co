@@ -1,21 +1,47 @@
-// Note:
-//
-// when user checks in
-// check if user has checked in already
-// if user has checked in, return error message
-//
-// scheduled job: every day, at 4am, remove all past check-ins
+import { CheckIn } from '../models'
 
 //
-// Helper
+// Helpers
 //
 
 const calculateCutoff = (date) => {
   if (typeof date !== 'object') {
-    date = new Date()
+    date = new Date(date)
   }
-  const cutoffMs = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())
+  const cutoffMs = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
   return new Date(cutoffMs)
+}
+
+const countCheckins = (checkins) => {
+  if (!checkins) {
+    return {}
+  } else if (!('length' in checkins)) {
+    const count = {}
+    count[checkins.business] = 1
+    return count 
+  }
+  return checkins.reduce((count, checkin) => {
+    count[c.business] = count[c.business] + 1 || 1
+    return count
+  }, {})
+}
+
+const countUserCheckins = (checkins, username) => {
+  if (!username || !checkins) {
+    return {}
+  } else if (!('length' in checkins)) {
+    const count = {}
+    if (checkins.username === username) {
+      count[checkins.business] = 1
+    }
+    return count
+  }
+  return checkins.reduce((count, checkin) => {
+    if (checkin.username === username) {
+      count[checkin.business] = username
+    }
+    return count
+  }, {})
 }
 
 //
@@ -23,7 +49,7 @@ const calculateCutoff = (date) => {
 //
 
 export const validateParams = (req, res, next) => {
-  if (!req.body.username) {
+  if (!(req.user && req.user.username)) {
     res.json({error: 'Missing username'})
   } else if (!req.body.business) {
     res.json({error: 'Missing business ID'})
@@ -39,7 +65,7 @@ export const isNotCheckedIn = (req, res, next) => {
       where: {
         username: req.user.username,
         business: req.body.business,
-        createdAt: { gte: lastNight },
+        createdAt: { $gte: lastNight },
       },
     })
     .then((checkin) => {
@@ -74,6 +100,32 @@ export const isCheckedIn = (req, res, next) => {
     .catch(next)
 }
 
+export const attachCheckins = (req, res, next) => {
+  // get all checkins that match
+  // - business ID range
+  // - gte last night
+  // -> Attach checkins (count)
+  // determine business where user is checked in
+  // -> Attach isCheckedIn
+  CheckIn
+    .find({
+      where: {
+        business: { $in: req.state.businesses.map((b) => b.id) },
+        createdAt: { $gte: calculateCutoff(new Date()) },
+      },
+    })
+    .then((checkins) => {
+      const count = countCheckins(checkins)
+      const isUserCheckedin = countUserCheckins(checkins, req.user && req.user.username)
+      req.state.businesses = req.state.businesses.map((business) => {
+        business.checkins = count[business.id] || 0
+        business.isCheckedIn = !!isUserCheckedin[business.id]
+        return business
+      })
+      next()
+    })
+}
+
 //
 // Endpoints
 //
@@ -93,18 +145,15 @@ export const postCheckIn = (req, res, next) => {
 export const cancelCheckIn = (req, res, next) => {
   const lastNight = calculateCutoff(new Date())
   CheckIn
-    .delete({
+    .find({
       where: {
         username: req.user.username,
         business: req.body.business,
-        createdAt: { gte: lastNight },
+        createdAt: { $gte: lastNight },
       },
     })
-    .then((success) => {
-      if (!success) {
-        // error
-        return
-      }
+    .then((checkin) => {
+      checkin.destroy()
       res.json({
         message: 'Successfully canceled checkin'
       })

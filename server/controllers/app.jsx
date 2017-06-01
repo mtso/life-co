@@ -4,13 +4,11 @@ import { StaticRouter } from 'react-router'
 import renderFullPage from '../utils/renderFullPage'
 import App from '../../app'
 
-import testData from './testdata.json'
-
 export const loadState = (req, res, next) => {
   const state = {
     username: req.user && req.user.username || null,
     searchTerm: (req.query && req.query.location) || '',
-    businesses: testData.businesses,
+    businesses: [],
   }
   req.state = state
   next()

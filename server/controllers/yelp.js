@@ -43,3 +43,10 @@ export const attachBusinesses = (req, res, next) => {
       next()
     })
 }
+
+export const returnBusinesses = (req, res, next) => {
+  if (req.state.businesses) {
+    return res.json(req.state.businesses)
+  }
+  next(new Error('No businesses at search endpoint'))
+}

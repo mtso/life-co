@@ -3,10 +3,9 @@ class InitialState {
     return Object.assign({}, this._state)
   }
   set state(value) {
-    this._state = value
+    console.log(value)
+    this._state = Object.assign({}, value)
   }
 }
 
-const initialState = new InitialState()
-
-export default initialState
+export default InitialState
