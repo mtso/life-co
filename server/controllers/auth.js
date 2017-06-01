@@ -8,10 +8,3 @@ export const isAuthenticated = (req, res, next) => {
   }
   next()
 }
-
-export const cacheSearch = (req, res, next) => {
-  if (req.query.search) {
-    setTerm(req.sessionID, req.query.search)
-  }
-  next()
-}

@@ -1,9 +1,9 @@
-const terms = {}
+const cache = {}
 
-const setTerm = (sessionId, term) => {
-  terms[sessionId] = term
+export const setTerm = (sessionId, term) => {
+  cache[sessionId] = term
 }
 
-const getTerm = (sessionId) => {
-  return terms[sessionId]
+export const getTerm = (sessionId) => {
+  return cache[sessionId]
 }

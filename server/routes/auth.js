@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import passport from 'passport'
-import { cacheSearch } from '../controllers/auth'
+import { cacheSearch } from '../controllers/cache'
 
 const auth = Router()
 

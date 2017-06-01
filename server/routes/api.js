@@ -3,7 +3,7 @@ import request from 'superagent'
 import { attachToken, searchBusinesses } from '../controllers/yelp'
 import { validateParams, isNotCheckedIn, isCheckedIn, postCheckIn, cancelCheckIn } from '../controllers/checkin'
 import { isAuthenticated } from '../controllers/auth'
-import { cacheSearch } from '../controllers/auth'
+import { cacheSearch } from '../controllers/cache'
 
 const api = express.Router()
 

@@ -8,8 +8,8 @@ import testData from './testdata.json'
 
 export const loadState = (req, res, next) => {
   const state = {
-    username: 'wiggs',
-    searchTerm: 'Palo Alto',
+    username: req.user && req.user.username || null,
+    searchTerm: (req.query && req.query.location) || '',
     businesses: testData.businesses,
   }
   req.state = state
