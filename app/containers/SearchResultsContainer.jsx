@@ -6,36 +6,77 @@ import handleError from '../utils/handleError'
 class SearchResultsContainer extends Component {
   constructor(props) {
     super(props)
-    // this.handleCheckin = this.handleCheckin.bind(this)
+    this.state = {
+      businesses: this.props.businesses,
+    }
+    this.handleCheckin = this.handleCheckin.bind(this)
+    this.updateBusinesses = this.updateBusinesses.bind(this)
   }
-  // handleCheckin(id) {
-  //   return (e) => {
-  //     e.preventDefault()
+  updateBusinesses(resp) {
+    const updated = resp.body
+    const newBusinesses = this.state.businesses.map((business) => {
+      if (business.id === updated.id) {
+        return updated
+      }
+      return business
+    })
+    this.setState({
+      businesses: newBusinesses,
+    })
+  }
+  handleCheckin(id) {
+    return (_) => {
+      const isLoggedIn = !!this.props.username
+      if (!isLoggedIn) {
+        location.href = '/auth/twitter?location=' + this.props.searchTerm
+        return
+      }
+      // we want to get the new business object,
+      // not the checkin object
+      // if is not checked in
+      const selected = this.state.businesses.filter((b) => b.id === id)[0]
+      const action = (selected && selected.isCheckedIn)
+        ? unCheckin
+        : checkin
 
-  //     const isLoggedIn = !!store.getState().username
-  //     if (!isLoggedIn) {
-  //       location.href = '/auth/twitter?location=' + this.props.searchTerm
-  //       return
-  //     }
+      action(id)
+        .then(this.updateBusinesses)
 
-  //     request
-  //       .post('/api/checkin')
-  //       .send({ business: id })
-  //       .then(({ body }) => {
-  //         if (!body) {
-  //           return console.error('missing body')
-  //         }
-  //         const { success, business } = body
-  //         if (success) {
-  //           store.dispatch({
-  //             type: 'CHECKIN',
-  //             business,
-  //           })
-  //         }
-  //       })
-  //       .catch(handleError)
-  //   }
-  // }
+      // request
+      //   .post('/api/checkin')
+      //   .send({ business: id })
+      //   .then((resp) => {
+          
+      //     // what we get (checkin obj)
+      //     // {
+      //     //   business: 'business-name-id',
+      //     //   username: 'username',
+      //     //   id: num,
+      //     //   createdAt,
+      //     //   updatedAt,
+      //     // }
+      //     // what we want (business obj)
+      //     // {
+      //     //   id: 'business=name-id',
+      //     //   ...business props,
+      //     //   checkins: num,
+      //     //   isCheckedIn: true,
+      //     // }
+          
+      //     const checkin = resp.body
+      //     const newBusinesses = this.state.businesses.map((business) => {
+      //       // if (b.id === business.id) {}
+      //       if (business.id === checkin.business) {
+      //         const newBusiness = Object.assign({}, business, {
+      //           isCheckedIn: true,
+      //           checkins: business.checkins + 1,
+      //         })
+      //       }
+      //     })
+      //   })
+      //   .catch(handleError)
+    }
+  }
   render() {
     return (
       <div>

@@ -2,13 +2,11 @@ import React from 'react'
 import SearchContainer from './containers/SearchContainer'
 import InitialState from './store/initialState'
 
-const App = ({ state }) => {
-  if (typeof window !== 'undefined') {
-    window.initialState = new InitialState()
-    window.initialState.state = state
-  }
+const App = ({ username, location, businesses }) => {
   return (
-    <SearchContainer />
+    <SearchContainer location={location}>
+      <SearchResultsContainer businesses={businesses} username={username}/>
+    </SearchContainer>
   )
 }
 

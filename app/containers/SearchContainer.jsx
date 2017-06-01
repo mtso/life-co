@@ -91,6 +91,9 @@ class SearchContainer extends Component {
         searchResults={this.state.searchResults}
         isLoading={this.state.isLoading}
       >
+        {
+          children
+        }
         <SearchResultsContainer
           searchResults={this.state.searchResults}
           searchTerm={this.state.searchTerm}

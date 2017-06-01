@@ -1,8 +1,15 @@
 import { rootReducer as reducer } from '../reducers'
 
+const createStore = (initialState) => {
+
+  return {
+    
+  }
+}
 class Store {
   constructor(reducer, initialState = {}) {
     this.state = reducer(initialState, {})
+    this.callbacks = []
   }
 
   getState() {
@@ -13,9 +20,13 @@ class Store {
     this.state = Object.assign({}, this.state, newState)
   }
 
-  dispatch(action, callback) {
+  dispatch(action) {
     this.setState(reducer(this.state, action))
-    callback && callback(this.getState())
+    this.callbacks.forEach((cb) => cb(this.getState()))
+  }
+
+  addListener(cb) {
+    this.callbacks.push(cb)
   }
 }
 
