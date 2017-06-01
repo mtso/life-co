@@ -1,9 +1,12 @@
 import React from 'react'
 import SearchContainer from './containers/SearchContainer'
-import initialState from './store/initialState'
+import InitialState from './store/initialState'
 
 const App = ({ state }) => {
-  initialState.state = state
+  if (typeof window !== 'undefined') {
+    window.initialState = new InitialState()
+    window.initialState.state = state
+  }
   return (
     <SearchContainer />
   )

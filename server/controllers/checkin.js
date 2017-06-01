@@ -15,6 +15,10 @@ const calculateCutoff = (date) => {
 const countCheckins = (checkins) => {
   if (!checkins) {
     return {}
+  } else if (!('length' in checkins)) {
+    const count = {}
+    count[checkins.business] = 1
+    return count 
   }
   return checkins.reduce((count, checkin) => {
     count[c.business] = count[c.business] + 1 || 1
@@ -25,6 +29,12 @@ const countCheckins = (checkins) => {
 const countUserCheckins = (checkins, username) => {
   if (!username || !checkins) {
     return {}
+  } else if (!('length' in checkins)) {
+    const count = {}
+    if (checkins.username === username) {
+      count[checkins.business] = 1
+    }
+    return count
   }
   return checkins.reduce((count, checkin) => {
     if (checkin.username === username) {
@@ -39,7 +49,7 @@ const countUserCheckins = (checkins, username) => {
 //
 
 export const validateParams = (req, res, next) => {
-  if (!req.body.username) {
+  if (!(req.user && req.user.username)) {
     res.json({error: 'Missing username'})
   } else if (!req.body.business) {
     res.json({error: 'Missing business ID'})
@@ -55,7 +65,7 @@ export const isNotCheckedIn = (req, res, next) => {
       where: {
         username: req.user.username,
         business: req.body.business,
-        createdAt: { gte: lastNight },
+        createdAt: { $gte: lastNight },
       },
     })
     .then((checkin) => {

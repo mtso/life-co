@@ -1,6 +1,14 @@
 import React from 'react'
 
-const Search = ({ isLoading, searchResults, searchboxRef, searchTerm, onChange, onSubmit, children }) => (
+const Search = ({
+  isLoading, 
+  searchResults, 
+  searchboxRef, 
+  searchTerm, 
+  onChange, 
+  onSubmit, 
+  children 
+}) => (
   <div>
     <h1>Life Co.</h1>
     <form onSubmit={onSubmit}>

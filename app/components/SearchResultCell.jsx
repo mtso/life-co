@@ -1,7 +1,8 @@
 import React from 'react'
 import Link from './Link'
+import AsyncButton from './AsyncButton'
 
-export default ({ image_url, name, url, rating, onCheckin }) => (
+export default ({ image_url, name, url, rating, onCheckin, isCheckedIn, checkins }) => (
   <div className='search-result-cell'>
     <Link to={url}>
       <img src={image_url} style={{height: '80px', display: 'inline-block'}} />
@@ -10,8 +11,9 @@ export default ({ image_url, name, url, rating, onCheckin }) => (
       <Link to={url}>
         <h2>{name}</h2>
       </Link>
-      <p>{rating} stars <button onClick={onCheckin}>Going
-        </button>
+      <p>{rating} stars. {checkins} checkins. <AsyncButton onClick={onCheckin}>
+        {isCheckedIn ? '√ ' : 'x'} Going
+      </AsyncButton>
       </p>
     </div>
   </div>
