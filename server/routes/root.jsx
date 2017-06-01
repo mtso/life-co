@@ -4,8 +4,13 @@ import { StaticRouter } from 'react-router'
 import { renderToString } from 'react-dom/server'
 import App from '../../app'
 import renderFullPage from '../utils/renderFullPage'
+import { getTerm } from '../utils/searchCache'
 
 const root = Router()
+
+const preloadState = (req, res) => {
+  const searchTerm = getTerm(req.sessionID)
+}
 
 root.get('/*', (req, res) => {
   const context = {}
