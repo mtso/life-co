@@ -6,7 +6,7 @@ const Search = ({ isLoading, searchResults, searchboxRef, searchTerm, onChange, 
     <form onSubmit={onSubmit}>
       <input
         type='search'
-        placeholder='Location'
+        placeholder={(!!searchTerm) ? '' : 'Location'}
         value={searchTerm}
         onChange={onChange}
         ref={searchboxRef}

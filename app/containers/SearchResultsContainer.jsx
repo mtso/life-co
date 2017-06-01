@@ -15,7 +15,7 @@ class SearchResultsContainer extends Component {
 
       const isLoggedIn = !!store.getState().username
       if (!isLoggedIn) {
-        location.href = '/auth/twitter?search=' + this.props.searchTerm
+        location.href = '/auth/twitter?location=' + this.props.searchTerm
         return
       }
 

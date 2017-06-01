@@ -12,8 +12,9 @@ class SearchContainer extends Component {
     this.state = {
       searchTerm: initialState.state.searchTerm || '',
       isLoading: false,
-      searchResults: [],
+      searchResults: initialState.state.businesses || [],
     }
+    console.log(this.state)
     this.onSubmit = this.onSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
   }
@@ -33,7 +34,7 @@ class SearchContainer extends Component {
     }, () => {
       searchBusinesses(this.state.searchTerm)
         .then((resp) => {
-          const searchResults = resp.body.businesses.map((b) => {
+          const searchResults = resp.body.map((b) => {
             return {
               name: b.name,
               rating: b.rating,
@@ -56,6 +57,7 @@ class SearchContainer extends Component {
       const preloadedState = window.__PRELOADED_STATE__
       this.setState({
         searchTerm: preloadedState.searchTerm,
+        searchResults: preloadedState.businesses,
       })
     }
   }

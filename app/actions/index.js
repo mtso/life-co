@@ -12,3 +12,10 @@ export const checkinAction = (businessId) => {
     businessId,
   }
 }
+
+export const login = (location) => {
+  return {
+    type: 'LOGIN',
+    location,
+  }
+}
