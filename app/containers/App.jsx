@@ -63,7 +63,8 @@ class App extends Component {
     return (cb) => {
       const isLoggedIn = !!this.props.username
       if (!isLoggedIn) {
-        location.href = '/auth/twitter?location=' + this.props.location
+        location.href = '/auth/twitter?location=' + this.state.location
+          + '&business=' + id
         return
       }
       const selected = this.state.businesses.filter((b) => b.id === id)[0]
