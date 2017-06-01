@@ -1,0 +1,13 @@
+@import 'variables';
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans');
+// @import '~bulma';
+
+h1 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+body, p {
+  font-family: 'Open Sans', sans-serif;
+}
+
+@import 'logotype';

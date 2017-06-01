@@ -1,6 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const loadModules = fs
   .readdirSync('node_modules')
@@ -13,10 +14,19 @@ const loadModules = fs
     return acc
   })
 
+const extractSass = new ExtractTextPlugin({
+  filename: 'style.css',
+  disable: false,
+  allChunks: true,
+})
+
 module.exports = [
   {
     target: 'web',
-    entry: path.resolve(__dirname, 'client', 'index'),
+    entry: [
+      path.resolve(__dirname, 'client', 'index'),
+      path.resolve(__dirname, 'client', 'style', 'main.scss'),
+    ],
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'bundle.js',
@@ -28,13 +38,24 @@ module.exports = [
       rules: [
         {
           test: /\.jsx?$/,
+          exclude: /node_modules/,
           loader: 'babel-loader',
           query: {
             presets: [ 'es2015', 'react' ],
           },
         },
+        {
+          test: /\.s[ac]ss$/,
+          loader: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: 'css-loader!sass-loader',
+          }),
+        },
       ],
     },
+    plugins: [
+      extractSass,
+    ],
   },
   {
     target: 'node',
@@ -62,10 +83,15 @@ module.exports = [
       rules: [
         {
           test: /\.jsx?$/,
+          exclude: /node_modules/,
           loader: 'babel-loader',
           query: {
             presets: [ 'es2015', 'react', 'stage-0' ],
           },
+        },
+        {
+          test: /\.s[ac]ss$/,
+          loader: 'ignore-loader',
         },
       ],
     },
