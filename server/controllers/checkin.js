@@ -21,7 +21,7 @@ const countCheckins = (checkins) => {
     return count 
   }
   return checkins.reduce((count, checkin) => {
-    count[c.business] = count[c.business] + 1 || 1
+    count[checkin.business] = count[checkin.business] + 1 || 1
     return count
   }, {})
 }
@@ -108,7 +108,7 @@ export const attachCheckins = (req, res, next) => {
   // determine business where user is checked in
   // -> Attach isCheckedIn
   CheckIn
-    .find({
+    .findAll({
       where: {
         business: { $in: req.state.businesses.map((b) => b.id) },
         createdAt: { $gte: calculateCutoff(new Date()) },

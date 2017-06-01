@@ -9,8 +9,10 @@ const api = express.Router()
 
 api.get('/search', cacheSearch, attachToken, attachBusinesses, attachCheckins, returnBusinesses)
 
+const getAndReturnBiz = [attachToken, attachBusiness, attachCheckins, returnBusiness] 
+
 api.route('/checkin')
-  .post(isAuthenticated, validateParams, isNotCheckedIn, postCheckIn, attachToken, attachBusiness, attachCheckins, returnBusiness)
-  .delete(isAuthenticated, validateParams, isCheckedIn, cancelCheckIn, attachToken, attachBusiness, attachCheckins, returnBusiness)
+  .post(isAuthenticated, validateParams, isNotCheckedIn, postCheckIn, getAndReturnBiz)
+  .delete(isAuthenticated, validateParams, isCheckedIn, cancelCheckIn, getAndReturnBiz)
 
 export default api

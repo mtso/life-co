@@ -1,7 +1,6 @@
 import request from 'superagent'
 
 export const checkin = (id) => {
-  console.log(id)
   return request
     .post('/api/checkin')
     .send({ business: id })
