@@ -7,7 +7,7 @@ import App from '../../app'
 export const loadState = (req, res, next) => {
   const state = {
     username: req.user && req.user.username || null,
-    searchTerm: (req.query && req.query.location) || '',
+    location: (req.query && req.query.location) || '',
     businesses: [],
   }
   req.state = state
@@ -23,7 +23,7 @@ export const renderApp = (req, res, next) => {
       location={req.url}
       context={context}
     >
-      <App initialState={preloadedState} />
+      <App {...preloadedState} />
     </StaticRouter>
   )
 

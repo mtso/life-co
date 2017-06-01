@@ -44,6 +44,26 @@ export const attachBusinesses = (req, res, next) => {
     })
 }
 
+export const attachBusiness = (req, res, next) => {
+  const id = req.body.business
+  request
+    .get(yelpApi.endpoint + yelpApi.path.business + '/' + id)
+    .set('Authorization', req.token.typedValue)
+    .then((resp) => {
+      req.state = req.state || {}
+      req.state.businesses = [resp.body]
+      next()
+    })
+    .catch(next)
+}
+
+export const returnBusiness = (req, res, next) => {
+  if (req.state.businesses) {
+    return res.json(req.state.businesses[0])
+  }
+  next(new Error('No businesses at search endpoint'))
+}
+
 export const returnBusinesses = (req, res, next) => {
   if (req.state.businesses) {
     return res.json(req.state.businesses)

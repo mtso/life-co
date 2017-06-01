@@ -137,7 +137,7 @@ export const postCheckIn = (req, res, next) => {
       business: req.body.business,
     })
     .then((checkin) => {
-      res.json(checkin.get({plain: true}))
+      next()
     })
     .catch(next)
 }
@@ -154,9 +154,7 @@ export const cancelCheckIn = (req, res, next) => {
     })
     .then((checkin) => {
       checkin.destroy()
-      res.json({
-        message: 'Successfully canceled checkin'
-      })
+      next()
     })
     .catch(next)
 }

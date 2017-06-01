@@ -12,7 +12,11 @@ class AsyncButton extends React.Component {
     e.preventDefault()
     this.setState({
       isLoading: true,
-    }, () => this.props.onClick())
+    }, () => this.props.onClick(() => {
+      this.setState({
+        isLoading: false,
+      })
+    }))
   }
   render() {
     return (
