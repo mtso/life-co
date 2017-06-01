@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize'
 import connString from 'rds-connection-string'
 import Token from './Token'
+import CheckIn from './CheckIn'
 
 const sequelize = new Sequelize(
   connString({scheme: 'mysql'}) || process.env.DATABASE_URL
@@ -8,6 +9,7 @@ const sequelize = new Sequelize(
 
 const imports = [
   Token,
+  CheckIn,
 ]
 
 const models = {}

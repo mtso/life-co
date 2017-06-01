@@ -12,3 +12,24 @@ Web app to find out who's hanging out tonight where.
 ## Attribution
 
 Business data is pulled from Yelp's Fusion API.
+
+## Minimum State Sketch
+
+state = {
+  username: '',
+  searchTerm: '',
+  businesses: [
+    {
+      id: 'business-id',
+      isCheckedIn: false,
+      checkins: 2,
+      name: 'name',
+      url: 'url',
+    },
+    {
+      id: 'business-id',
+      isCheckedIn: false,
+      ...
+    }
+  ]
+}
