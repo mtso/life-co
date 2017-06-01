@@ -1,4 +1,5 @@
 import React from 'react'
+import SearchBox from './SearchBox'
 
 const Search = ({
   isLoading, 
@@ -7,29 +8,31 @@ const Search = ({
   searchTerm, 
   onChange, 
   onSubmit, 
-  children 
+  children
 }) => (
   <div>
-    <h1>Life Co.</h1>
-    <form onSubmit={onSubmit}>
-      <input
-        type='search'
-        placeholder={(!!searchTerm) ? '' : 'Location'}
-        value={searchTerm}
-        onChange={onChange}
-        ref={searchboxRef}
-      />
-      <button type='submit'>
-        Search
-      </button>
-    </form>
-    <p>Search Results {
-      isLoading && '(Loading...)' ||
-      searchResults && `(${searchResults.length})`
-    }</p>
-    {
-      children
-    }
+    <div className='nav'>
+      <div className='nav-left'>
+        <h1 className='logotype nav-item'>Life Co.</h1>
+        <SearchBox
+          { ...{
+            onSubmit,
+            onChange,
+            searchTerm,
+            searchboxRef,
+          }}
+        />
+      </div>
+    </div>
+    <div className='search-results section'>
+      <p className='search-results-info'>Search Results {
+        isLoading && '(Loading...)' ||
+        searchResults && `(${searchResults.length})`
+      }</p>
+      {
+        children
+      }
+    </div>
   </div>
 )
 

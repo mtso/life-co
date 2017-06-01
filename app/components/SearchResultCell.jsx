@@ -5,15 +5,21 @@ import AsyncButton from './AsyncButton'
 export default ({ image_url, name, url, rating, onCheckin, isCheckedIn, checkins }) => (
   <div className='search-result-cell'>
     <Link to={url}>
-      <img src={image_url} style={{height: '80px', display: 'inline-block'}} />
+      <img
+        src={image_url}
+        className='image is-128x128 thumbnail'
+      />
+      <AsyncButton onClick={onCheckin}>
+        {isCheckedIn ? '√ ' : 'x'} Going
+      </AsyncButton>
     </Link>
-    <div style={{display: 'inline-block', marginLeft: '10px'}}>
+    <div
+      className='search-result-content'
+    >
       <Link to={url}>
         <h2>{name}</h2>
       </Link>
-      <p>{rating} stars. {checkins} checkins. <AsyncButton onClick={onCheckin}>
-        {isCheckedIn ? '√ ' : 'x'} Going
-      </AsyncButton>
+      <p>{rating} stars. {checkins} checkins. 
       </p>
     </div>
   </div>

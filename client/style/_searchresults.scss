@@ -1,0 +1,54 @@
+@import 'variables';
+
+.search-results-info {
+  font-family: $display-family;
+}
+
+.search-result-cell {
+  position: relative;
+  height: 138px;
+}
+
+.search-result-content {
+  position: relative;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.thumbnail {
+  display: inline-block;
+  object-fit: cover;
+  position: absolute;
+}
+
+.checkin {
+  position: relative;
+  display: inline-block;
+  width: 128px;
+  height: 30px;
+  margin-top: 98px;
+  z-index: 100;
+  border: none;
+  font-weight: bold;
+  color: $primary;
+}
+
+.checkin {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.checkin:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.checkin:active {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.checkin:disabled {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.uncheckin {
+  background-color: white;
+}
