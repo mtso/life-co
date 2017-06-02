@@ -21,6 +21,7 @@ class AsyncButton extends React.Component {
   render() {
     return (
       <button
+        className='checkin'
         disabled={this.state.isLoading}
         onClick={this.onClick}
       >

@@ -1,6 +1,8 @@
 @import 'variables';
 
 .logotype {
-  font-family: $display-font;
+  font-family: $display-family;
   font-size: $logo-size;
+  font-weight: normal;
+  color: $accent-color;
 }
