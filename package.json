@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "webpack && node ./build/server.js",
+    "start": "webpack --display-error-details && node ./build/server.js",
     "dev": "./node_modules/.bin/ttab eval \"webpack -w\" ; ./node_modules/.bin/ttab eval \"torus run nodemon ./build/server.js\"",
     "zip": "node ./bin/zip.js",
     "clean": "rm -rf ./build ./dist ./node_modules",
