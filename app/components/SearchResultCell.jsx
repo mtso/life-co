@@ -22,8 +22,11 @@ export default ({ image_url, name, url, rating, onCheckin, isCheckedIn, checkins
       <Link to={url}>
         <h2>{name}</h2>
       </Link>
-      <p>{rating} stars. {checkins} checkins. 
-      </p>
+      <p>{rating} stars. {checkins} checkins.</p>
+      <img
+        className='attribution'
+        src='/img/Yelp_trademark_RGB_outline.png'
+      />
     </div>
   </div>
 )
