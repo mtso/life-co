@@ -2,6 +2,7 @@ import request from 'superagent'
 import { Token } from '../models'
 import { getEndpoint } from '../utils/yelpApi'
 import yelpApi from '../yelpApi.json'
+import { setTerm } from './cache'
 
 export const attachToken = (req, res, next) =>
   Token
@@ -35,7 +36,10 @@ export const attachBusinesses = (req, res, next) => {
     .set('Authorization', req.token.typedValue)
     .query({ location: req.query.location })
     .end((err, resp) => {
-      if (err || resp.body.error) {
+      console.log(resp.body)
+      if (err || resp.body.error || resp.body.total < 1) {
+        // Delete erroneous bad terms from cache
+        setTerm(req.sessionID, undefined)
         return next(err || resp.body.error)
       }
       req.state = req.state || {}
