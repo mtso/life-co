@@ -2,6 +2,7 @@ const path = require('path')
 const fs = require('fs')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const loadModules = fs
   .readdirSync('node_modules')
@@ -19,6 +20,10 @@ const extractSass = new ExtractTextPlugin({
   disable: false,
   allChunks: true,
 })
+
+const copyImages = new CopyWebpackPlugin([
+  {context: 'client/img', from: '**/*', to: 'img/'},
+])
 
 module.exports = [
   {
@@ -55,6 +60,7 @@ module.exports = [
     },
     plugins: [
       extractSass,
+      copyImages,
     ],
   },
   {

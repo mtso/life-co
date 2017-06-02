@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 .search-box, .search-button {
   font-family: $display-family;
@@ -18,8 +19,7 @@
 }
 
 .search-container {
-  right: 50px;
-  float: right;
+  margin-left: 36px;// -6px;
 }
 
 .search-button {
@@ -29,14 +29,16 @@
   color: $primary-invert;
   text-transform: uppercase;
   padding: 0 1.4em 0;
+
+  @include transition(0.17s);
 }
 
 .search-button:hover {
-  background-color: lighten( $accent-color, 5% );
+  background-color: lighten($accent-color, 5%);
 }
 
 .search-button:active {
-  background-color: darken( $accent-color, 5% );
+  background-color: darken($accent-color, 5%);
 }
 
 body, html {
@@ -51,6 +53,7 @@ body, html {
   position: relative;
   display: inline-block;
   width: 100%;
+  min-width: 340px;
   padding-left: 1em;
   padding-right: 1em;
 }

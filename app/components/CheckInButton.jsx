@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-class AsyncButton extends React.Component {
+class CheckInButton extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -21,7 +21,7 @@ class AsyncButton extends React.Component {
   render() {
     return (
       <button
-        className='checkin'
+        className={this.props.isCheckedIn ? 'uncheckin' : 'checkin'}
         disabled={this.state.isLoading}
         onClick={this.onClick}
       >
@@ -31,4 +31,4 @@ class AsyncButton extends React.Component {
   }
 }
 
-export default AsyncButton
+export default CheckInButton

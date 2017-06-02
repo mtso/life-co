@@ -1,18 +1,33 @@
 @import 'variables';
+@import 'mixins';
 
 .search-results-info {
   font-family: $display-family;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
 }
 
 .search-result-cell {
   position: relative;
-  height: 138px;
+  height: 146px;
 }
 
 .search-result-content {
-  position: relative;
+  position: absolute;
   display: inline-block;
-  margin-left: 10px;
+  margin-left: 14px;
+
+  p {
+    font-weight: 400;
+    font-size: 0.8em;
+  }
+}
+
+.search-result-title {
+  font-family: $display-family;
+  font-weight: bold;
 }
 
 .thumbnail {
@@ -21,7 +36,13 @@
   position: absolute;
 }
 
-.checkin {
+.attribution {
+  height: 3em;
+  margin-left: -10px;
+  padding: 0;
+}
+
+.checkin, .uncheckin {
   position: relative;
   display: inline-block;
   width: 128px;
@@ -31,10 +52,12 @@
   border: none;
   font-weight: bold;
   color: $primary;
+
+  @include transition(0.22s);
 }
 
 .checkin {
-  background-color: rgba(255, 255, 255, 0);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .checkin:hover {
@@ -50,5 +73,20 @@
 }
 
 .uncheckin {
-  background-color: white;
+  background-color: $accent-color;
+  color: $primary-invert;
+}
+
+.uncheckin:hover {
+  background-color: lighten($accent-color, 5%);
+}
+
+$dark-accent: darken($accent-color, 5%);
+
+.uncheckin:active {
+  background-color: rgba($dark-accent, 0.5);
+}
+
+.uncheckin:disabled {
+  background-color: rgba($dark-accent, 0.5);
 }

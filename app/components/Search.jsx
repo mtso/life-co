@@ -1,5 +1,6 @@
 import React from 'react'
 import SearchBox from './SearchBox'
+import Link from './Link'
 
 const Search = ({
   isLoading, 
@@ -33,6 +34,15 @@ const Search = ({
         children
       }
     </div>
+    { searchResults.length > 1 && (
+      <div className='footer'>
+        <Link to='https://github.com/mtso'>
+          Designed and built by Matthew Tso.
+        </Link> <Link to='https://github.com/mtso/life-co'>
+          View full source.
+        </Link>
+      </div>
+    )}
   </div>
 )
 
