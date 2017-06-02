@@ -35,7 +35,11 @@ class App extends Component {
             businesses: resp.body,
           })
         })
-        .catch(handleError)
+        .catch((err) => {
+          this.setState({
+            isLoading: false,
+          })
+        })
     })
   }
   onChange(e) {
