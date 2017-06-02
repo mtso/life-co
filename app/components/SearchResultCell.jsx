@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from './Link'
-import AsyncButton from './AsyncButton'
+import CheckInButton from './CheckInButton'
 
 export default ({ image_url, name, url, rating, onCheckin, isCheckedIn, checkins }) => (
   <div className='search-result-cell'>
@@ -9,9 +9,12 @@ export default ({ image_url, name, url, rating, onCheckin, isCheckedIn, checkins
         src={image_url}
         className='image is-128x128 thumbnail'
       />
-      <AsyncButton onClick={onCheckin}>
+      <CheckInButton
+        onClick={onCheckin}
+        isCheckedIn={isCheckedIn}
+      >
         {isCheckedIn ? '√ ' : 'x'} Going
-      </AsyncButton>
+      </CheckInButton>
     </Link>
     <div
       className='search-result-content'
