@@ -6,14 +6,11 @@ import logger from 'morgan'
 import helmet from 'helmet'
 import passport from 'passport'
 import { Strategy as TwitterStrategy } from 'passport-twitter'
-import urlencode from 'urlencode'
-
-const callbackUrl = process.env.HOSTNAME + '/auth/twitter/callback'
 
 const twitterStrategy = new TwitterStrategy({
   consumerKey: process.env.TWITTER_CONSUMER_KEY,
   consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-  callbackURL: urlencode(callbackUrl),
+  callbackURL: process.env.HOSTNAME + '/auth/twitter/callback',
 }, (token, tokenSecret, profile, done) => 
   done(null, {username: profile.username})
 )
