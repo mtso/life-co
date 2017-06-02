@@ -3,17 +3,31 @@
 
 .search-results-info {
   font-family: $display-family;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
 }
 
 .search-result-cell {
   position: relative;
-  height: 138px;
+  height: 146px;
 }
 
 .search-result-content {
-  position: relative;
+  position: absolute;
   display: inline-block;
-  margin-left: 10px;
+  margin-left: 14px;
+
+  p {
+    font-weight: 400;
+    font-size: 0.8em;
+  }
+}
+
+.search-result-title {
+  font-family: $display-family;
+  font-weight: bold;
 }
 
 .thumbnail {
@@ -24,6 +38,8 @@
 
 .attribution {
   height: 3em;
+  margin-left: -10px;
+  padding: 0;
 }
 
 .checkin, .uncheckin {

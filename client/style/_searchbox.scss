@@ -19,8 +19,7 @@
 }
 
 .search-container {
-  right: 50px;
-  float: right;
+  margin-left: 36px;// -6px;
 }
 
 .search-button {
@@ -54,6 +53,7 @@ body, html {
   position: relative;
   display: inline-block;
   width: 100%;
+  min-width: 340px;
   padding-left: 1em;
   padding-right: 1em;
 }
