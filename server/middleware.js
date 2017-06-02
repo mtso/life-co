@@ -7,10 +7,12 @@ import helmet from 'helmet'
 import passport from 'passport'
 import { Strategy as TwitterStrategy } from 'passport-twitter'
 
+const callbackUrl = path.join(process.env.HOSTNAME, '/auth/twitter/callback')
+
 const twitterStrategy = new TwitterStrategy({
   consumerKey: process.env.TWITTER_CONSUMER_KEY,
   consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-  callbackURL: path.join(process.env.HOSTNAME, '/auth/twitter/callback'),
+  callbackURL: encodeURIComponent(callbackUrl),
 }, (token, tokenSecret, profile, done) => 
   done(null, {username: profile.username})
 )
