@@ -10,7 +10,7 @@ import { Strategy as TwitterStrategy } from 'passport-twitter'
 const twitterStrategy = new TwitterStrategy({
   consumerKey: process.env.TWITTER_CONSUMER_KEY,
   consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-  callbackURL: path.join(process.env.HOSTNAME, '/auth/twitter/callback'),
+  callbackURL: process.env.HOSTNAME + '/auth/twitter/callback',
 }, (token, tokenSecret, profile, done) => 
   done(null, {username: profile.username})
 )

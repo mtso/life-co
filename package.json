@@ -1,9 +1,9 @@
 {
   "name": "life-co",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
-    "start": "webpack && node ./build/server.js",
+    "start": "webpack --display-error-details && node ./build/server.js",
     "dev": "./node_modules/.bin/ttab eval \"webpack -w\" ; ./node_modules/.bin/ttab eval \"torus run nodemon ./build/server.js\"",
     "zip": "node ./bin/zip.js",
     "clean": "rm -rf ./build ./dist ./node_modules",
@@ -38,6 +38,7 @@
     "sequelize": "^3.30.4",
     "style-loader": "^0.18.1",
     "superagent": "^3.5.2",
+    "urlencode": "^1.1.0",
     "webpack": "2.6.1"
   },
   "devDependencies": {
@@ -48,6 +49,7 @@
     "nsp": "^2.6.3",
     "snyk": "^1.32.0",
     "supertest": "^3.0.0",
+    "torus-cli": "^0.24.1",
     "ttab": "^0.5.1"
   }
 }
